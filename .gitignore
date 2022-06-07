@@ -12,7 +12,6 @@
 /.next/
 /out/
 /src/cache/
-/src/blog/*
 
 # production
 /build

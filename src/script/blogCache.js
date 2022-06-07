@@ -20,9 +20,14 @@ function allPost() {
     };
   });
 
-  return `export const allPost = ${JSON.stringify(
-    sortListByDateOrTitle(allPost)
-  )};`;
+  // if(allPost.length===0){
+  //   return `export const allPost = ${JSON.stringify([])};`;
+  // }else{
+    return `export const allPost = ${JSON.stringify(
+      sortListByDateOrTitle(allPost)
+    )};`;
+  //}
+  
 }
 
 function getAllCategory(){
@@ -90,9 +95,9 @@ function getMenuList(){
 }
 
 try {
-  fs.readdirSync("src/cache");
+  fs.readdirSync("../cache");
 } catch (e) {
-  fs.mkdirSync("src/cache");
+  fs.mkdirSync("../cache");
 }
 
 fs.writeFile("src/cache/blogData.js", `${allPost()} ${getMenuList()}`, function (err) {
