@@ -42,7 +42,7 @@ const About: NextPage = () => {
   return <div className="mt-4 space-y-8">
     <MainArticle articleName="✨Introduce">
         <ContentList liElements={[
-            <span className="text-black">김혜리 | Kim Hyeri</span>,
+            <span key={'content0'} className="text-black">김혜리 | Kim Hyeri</span>,
             "Front/Backend Developer",
             <>
                 TECH
