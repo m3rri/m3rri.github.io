@@ -1,26 +1,65 @@
+/** @jsxImportSource @emotion/react */
 import { FunctionComponent } from "react";
-import Link from 'next/link';
+import Link from "next/link";
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
+import color from "../Atoms/CssConfig";
 
 interface ArticleProps {
-    articleLink?: string;
-    articleName: string;
+    articleLink?: String;
+    articleName: String;
 }
 
-const MainArticle:FunctionComponent<ArticleProps> = ({articleLink, articleName, children})=>{
-    const articleTitle = <h2 className='text-default text-center tracking-widest font-bold border border-deep py-1.5 px-4 absolute -top-5 -left-[1px] w-[300px] bg-white'>
-        {articleName}
-    </h2>;
+const Article = styled.article({
+    border: `1px solid ${color.deep}`,
+    padding: "12px",
+    position: "relative",
+});
 
-    return <article className={`${articleLink}List border border-deep p-3 relative`}>
-        {articleLink ?
-        <Link href={`/${articleLink}`}>
-            <a className='hover:text-light'>{articleTitle}</a>
-        </Link>
-        :
-        articleTitle
-        }
-        {children || <div className='py-[60px] text-center text-black/70'>/ empty😪 /</div>}
-    </article>
-}
+const ArticleTitle = styled.h2({
+    color: color.def,
+    textAlign: "center",
+    letterSpacing: "0.1em",
+    fontWeight: "bold",
+    border: `1px solid ${color.deep}`,
+    padding: "6px 16px",
+    position: "absolute",
+    top: "-20px",
+    left: "-1px",
+    width: "300px",
+    background: color.white,
+});
+
+const EmptyArticle = styled.div({
+    padding: "60px 0",
+    textAlign: "center",
+    color: color.aaa,
+    "&::before": {
+        content: `'/ empty😪 /'`,
+    },
+});
+
+const link = css`
+    hover: {
+        color: ${color.light};
+    }
+`;
+
+const MainArticle: FunctionComponent<ArticleProps> = ({ articleLink, articleName, children }) => {
+    return (
+        <Article>
+            {articleLink ? (
+                <Link href={`/${articleLink}`}>
+                    <a css={link}>
+                        <ArticleTitle>{articleName}</ArticleTitle>
+                    </a>
+                </Link>
+            ) : (
+                <ArticleTitle>{articleName}</ArticleTitle>
+            )}
+            {children || <EmptyArticle />}
+        </Article>
+    );
+};
 
 export default MainArticle;
