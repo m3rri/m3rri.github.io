@@ -1,6 +1,6 @@
 @tailwind base;
 @tailwind components;
 .markdown-body code {
-    color: #329F5B;
+    color: #329f5b;
 }
 @tailwind utilities;

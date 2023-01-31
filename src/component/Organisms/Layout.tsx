@@ -1,31 +1,89 @@
-import { FunctionComponent, useEffect, useState } from "react";
-//import Navbar from 'component/Molecules/Navbar';
-import Navbar from "component/Molecules/NavbarEmotion";
+/** @jsxImportSource @emotion/react */
+import { FunctionComponent, useEffect, useRef, useState } from "react";
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
+import Navbar from "component/Molecules/Navbar";
 import { allMenu } from "cache/blogData";
 import { FaEnvelope, FaGithub } from "react-icons/fa";
 import Link from "next/link";
+import color, { styleConfig as style } from "../Atoms/CssConfig";
 
 interface LayoutProps {
     asPath: string;
 }
 
-const mainPadding = <div className="aside-non-role h-full flex-auto w-2"></div>;
-const DEFAULT_BORDER = "border-b border-deep";
+const PaddingAside = styled.div({
+    flex: "1 1 auto",
+    height: "100%",
+    width: "8px",
+});
+
+const Header = styled.header({
+    borderBottom: `1px solid ${color.deep}`,
+    "&.header-get-on": {
+        zIndex: 10,
+        position: "fixed",
+        top: 0,
+        width: "100%",
+    },
+});
+
+const MainWrapper = styled.div({
+    display: "flex",
+    flexDirection: "row",
+    main: {
+        flex: "none",
+        margin: "16px 0",
+        padding: "0 12px",
+        width: "100%",
+        [style.lg]: {
+            width: "1000px",
+        },
+    },
+});
+
+const Footer = styled.footer({
+    background: color.white,
+    borderTop: `1px solid ${color.deep}`,
+    color: color.black,
+    fontSize: "13px",
+    letterSpacing: "-0.01em",
+    padding: "11px",
+    width: "100%",
+    div: {
+        [style.space]: {
+            padding: style.spaceY(4),
+        },
+    },
+    svg: {
+        display: "inline",
+    },
+    "a:hover": {
+        color: color.highlight,
+    },
+    "&.fixed-bottom": {
+        position: "fixed",
+        bottom: 0,
+    },
+});
 
 const Layout: FunctionComponent<LayoutProps> = ({ asPath, children }) => {
-    const [headerClass, setHeaderClass] = useState(DEFAULT_BORDER);
+    const [headerClass, setHeaderClass] = useState("");
     const [scrollState, setScrollState] = useState(0);
-    const [footerClass, setFooterClass] = useState("mt-5");
+    const [footerClass, setFooterClass] = useState("");
+    const mainArea = useRef<HTMLElement>(null);
 
     useEffect(() => {
         const setFooter = () => {
-            const windowHeight = window.innerHeight;
-            const contentHeight = document.querySelector(".mainArea")!.clientHeight;
-            windowHeight - 150 > contentHeight ? setFooterClass("fixed bottom-0 w-full") : setFooterClass("mt-5");
+            if (mainArea.current) {
+                const windowHeight = window.innerHeight;
+                const contentHeight = mainArea.current.clientHeight;
+                windowHeight - 150 > contentHeight ? setFooterClass("fixed-bottom") : setFooterClass("");
+            }
         };
         window.addEventListener("resize", setFooter);
         setFooter();
-    }, [footerClass, children]);
+    }, [footerClass, children, mainArea.current?.clientHeight]);
 
     useEffect(() => {
         const setHeader = () => {
@@ -34,9 +92,9 @@ const Layout: FunctionComponent<LayoutProps> = ({ asPath, children }) => {
             const { scrollHeight } = document.body;
 
             if (scrollY > 0 && ((scrollY > 36 && scrollState >= scrollY) || currentScroll + 100 > scrollHeight)) {
-                setHeaderClass(`z-10 fixed top-0 w-full ${DEFAULT_BORDER}`);
+                setHeaderClass("header-get-on");
             } else {
-                setHeaderClass(DEFAULT_BORDER);
+                setHeaderClass("");
             }
             setScrollState(scrollY);
         };
@@ -45,29 +103,33 @@ const Layout: FunctionComponent<LayoutProps> = ({ asPath, children }) => {
     }, [scrollState]);
 
     return (
-        <div className="text-black">
-            <header className={headerClass}>
+        <div
+            css={css`
+                color: ${color.black};
+            `}
+        >
+            <Header className={headerClass}>
                 <Navbar menuList={allMenu} activePath={asPath} />
-            </header>
-            <div className="mainArea flex flex-row">
-                {mainPadding}
-                <main className="px-3 w-full lg:w-[1000px] my-4 flex-none">{children}</main>
-                {mainPadding}
-            </div>
-            <footer
-                className={`p-4 space-y-2 bg-white border-t border-deep ${footerClass} w-full text-black tracking-widest`}
-            >
+            </Header>
+            <MainWrapper>
+                <PaddingAside />
+                <main className="mainArea" ref={mainArea}>
+                    {children}
+                </main>
+                <PaddingAside />
+            </MainWrapper>
+            <Footer className={footerClass}>
                 <div>
-                    <FaEnvelope className="inline" /> m3rri17@gmail.com
+                    <FaEnvelope /> m3rri17@gmail.com
                 </div>
                 <div>
-                    <FaGithub className="inline" />
+                    <FaGithub />
                     <Link href="https://github.com/m3rri">
                         <a target={"_blank"}> https://github.com/m3rri</a>
                     </Link>
                 </div>
-                <div>©2022 KimHyeRi. All rights reserved.</div>
-            </footer>
+                <div>© 2022 KimHyeRi. All rights reserved.</div>
+            </Footer>
         </div>
     );
 };

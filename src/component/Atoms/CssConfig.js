@@ -14,6 +14,7 @@ const styleConfig = {
     spaceY: (num) => `${num}px 0 0`,
     spaceX: (num) => `0 0 0 ${num}px`,
     md: "@media(min-width: 768px)",
+    lg: "@media(min-width: 1024px)",
 };
 
 export default colorConfig;
