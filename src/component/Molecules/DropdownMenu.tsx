@@ -5,72 +5,55 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { Menu } from "component/types/Menu";
 import color, { styleConfig as style } from "../Atoms/CssConfig";
+import DropDownButton from "../Atoms/ButtonDropDown";
 
 interface DropDownProps {
     menu: Menu;
     activePath: string;
 }
 
-const DropDownButton = styled.button({
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "8px 16px 8px 12px",
-    width: "100%",
-    "&:hover": {
-        border: `1 solid ${color.light}`,
-        color: color.black,
-        transitionDuration: "500ms",
-    },
-    [style.md]: {
-        padding: "14px 12px",
-        margin: "-14px -20px",
-        width: "auto",
-    },
-});
-
-const DropDownListWrapper = styled.div({
-    background: color.white,
-    border: `1px solid ${color.deep}`,
-    margin: "8px 20px",
-    position: "relative",
-    width: "auto",
-    zIndex: 0,
-    [style.md]: {
-        margin: "6px",
-        position: "absolute",
-        zIndex: 10,
-    },
-    "& .dropdown-menu-list": {
-        fontSize: "14px",
-        padding: "4px 0",
-        "& .dropdown-menu-list-part-name": {
-            color: color.black,
-            fontSize: "12px",
-            fontWeight: "bold",
-            paddingLeft: "8px",
-        },
-        li: {
-            border: 0,
-        },
-        a: {
-            display: "block",
-            justifyContent: "center",
-            padding: "8px 16px",
-            "&:hover": {
-                background: color.light,
-                color: color.white,
-                transitionDuration: "300ms",
-            },
-        },
-        "& .dropdown-menu-active-link": {
-            background: color.highlight,
-        },
-    },
-    "ul:not(:first-of-type)": {
-        borderTop: `1px solid ${color.light}`,
-    },
-});
+const DropDownListWrapper = styled.div`
+    background: ${color.white};
+    border: 1px solid ${color.deep};
+    margin: 8px 20px;
+    position: relative;
+    width: auto;
+    z-index: 0;
+    ${style.md} {
+        margin: 6px;
+        position: absolute;
+        z-index: 10;
+    }
+    .dropdown-menu-list {
+        font-size: 14px;
+        padding: 4px 0;
+        .dropdown-menu-list-part-name {
+            color: ${color.black};
+            font-size: 12px;
+            font-weight: bold;
+            padding-left: 8px;
+        }
+        li {
+            border: 0;
+        }
+        a {
+            display: block;
+            justify-content: center;
+            padding: 8px 16px;
+            &:hover {
+                background: ${color.light};
+                color: ${color.white};
+                transition-duration: 300ms;
+            }
+        }
+        .dropdown-menu-active-link {
+            background: ${color.highlight};
+        }
+    }
+    ul:not(:first-of-type) {
+        border-top: 1px solid ${color.light};
+    }
+`;
 
 const DropdownMenu: FunctionComponent<DropDownProps> = ({ menu, activePath = "" }) => {
     const DROPDOWN_PREFIX = "dropdown_";

@@ -14,7 +14,7 @@ interface HomeProps {
 }
 
 const home = css`
-    margin-top: 16px;
+    margin: 16px 16px 0;
     article {
         ${style.space} {
             margin: ${style.spaceY(32)};

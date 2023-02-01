@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import MainArticle from "component/Molecules/MainArticle";
 import type { NextPage } from "next";
 import { css } from "@emotion/react";
+import MainArticle from "component/Molecules/MainArticle";
 
 const Portfolio: NextPage = () => {
     return (

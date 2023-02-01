@@ -14,81 +14,81 @@ interface NavbarProps {
 
 const BLOG_NAME = "MERRI`s DEVELOG";
 
-const Nav = styled.nav({
-    padding: "7px 8px",
-    background: color.white,
-    "& .navbar-container": {
-        alignItems: "center",
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-        marginLeft: "auto",
-        marginRight: "auto",
-        width: "100%",
-    },
-    "& .navbar-blog-name": {
-        alignItems: "center",
-        alignSelf: "center",
-        cursor: "pointer",
-        display: "flex",
-        fontStyle: "italic",
-        fontSize: "20px",
-        color: color.black,
-        fontWeight: "bold",
-        whiteSpace: "nowrap",
-        "&:hover": {
-            fontStyle: "normal",
-        },
-    },
-    "& .navbar-dropdown-button": {
-        alignItems: "center",
-        marginLeft: "12px",
-        [style.md]: {
-            display: "none",
-        },
-        justifyContent: "center",
-        display: "inline-flex",
-        padding: "0 4px",
-    },
-    "& .navbar-menu-list-wrapper": {
-        width: "100%",
-        marginBottom: "-6px",
-        [style.md]: {
-            border: 0,
-            display: "block",
-            width: "auto",
-            marginBottom: 0,
-        },
-        "& .navbar-menu-list": {
-            display: "flex",
-            flexDirection: "column",
-            fontSize: "14px",
-            margin: "16px -8px 0 -8px",
-            "& .navbar-menu": {
-                [style.space]: {
-                    borderTop: `1px solid ${color.deep}`,
-                },
-            },
-            [style.md]: {
-                flexDirection: "row",
-                margin: 0,
-                fontSize: "14px",
-                lineHeight: "20px",
-                "& .navbar-menu:not(:first-of-type)": {
-                    borderTop: 0,
-                    borderLeft: `1px solid ${color.deep}`,
-                },
-            },
-        },
-    },
-});
+const Nav = styled.nav`
+    padding: 7px 8px;
+    background: ${color.white};
+    & .navbar-container {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+    & .navbar-blog-name {
+        align-items: center;
+        align-self: center;
+        cursor: pointer;
+        display: flex;
+        font-style: italic;
+        font-size: 20px;
+        color: ${color.black};
+        font-weight: bold;
+        white-space: nowrap;
+        &:hover {
+            font-style: normal;
+        }
+    }
+    & .navbar-dropdown-button {
+        align-items: center;
+        margin-left: 12px;
+        ${style.md} {
+            display: none;
+        }
+        justify-content: center;
+        display: inline-flex;
+        padding: 0 4px;
+    }
+    & .navbar-menu-list-wrapper {
+        width: 100%;
+        margin-bottom: -6px;
+        ${style.md} {
+            border: 0;
+            display: block;
+            width: auto;
+            margin-bottom: 0;
+        }
+        & .navbar-menu-list {
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+            margin: 16px -8px 0 -8px;
+            & .navbar-menu {
+                ${style.space} {
+                    border-top: 1px solid ${color.deep};
+                }
+            }
+            ${style.md} {
+                flex-direction: row;
+                margin: 0;
+                font-size: 14px;
+                line-height: 20px;
+                & .navbar-menu:not(:first-of-type) {
+                    border-top: 0;
+                    border-left: 1px solid ${color.deep};
+                }
+            }
+        }
+    }
+`;
 
-const Menu = styled.li({
-    [style.md]: {
-        padding: "10px 20px 14px",
-        margin: "-10px 0",
-    },
-});
+const Menu = styled.li`
+    ${style.md} {
+        padding: 10px 20px 14px;
+        margin: -10px 0;
+    }
+`;
 
 const notDummyMenu = css`
     &:hover {

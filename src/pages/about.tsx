@@ -15,7 +15,7 @@ const SkillChart = dynamic(() => import("component/Molecules/SkillChart"), {
 });
 
 const about = css`
-    margin-top: 16px;
+    margin: 16px 16px 0;
     article {
         ${style.space} {
             margin: ${style.spaceY(32)};
@@ -26,13 +26,6 @@ const about = css`
     }
     .about-skill-chart {
         height: 288px;
-    }
-    svg.about-contact-icon {
-        display: inline;
-        color: ${color.deep};
-        font-size: 23px;
-        margin-right: -6px;
-        padding-bottom: 2px;
     }
     .about-link-has-url:hover {
         color: ${color.highlight};
@@ -47,7 +40,16 @@ const about = css`
     }
     svg.about-skill-icon {
         display: inline;
-        font-size: 29px;
+        vertical-align: middle;
+        font-size: 1.6rem;
+        padding: 0 4px 4px 0;
+    }
+    svg.about-contact-icon {
+        display: inline;
+        vertical-align: middle;
+        color: ${color.deep};
+        font-size: 1.6rem;
+        padding: 0 4px 4px 0;
     }
 `;
 
@@ -112,7 +114,7 @@ const careers = [
             <>
                 👆 IT Developer
                 <br />
-                ........👇 PCB Engineer
+                .........👇 PCB Engineer
             </>
         ),
     },

@@ -10,30 +10,28 @@ interface ListProps {
     Icon?: IconType;
 }
 
-const List = styled.ul({
-    margin: "8px",
-    marginTop: "12px",
-    marginBottom: "20px",
-    li: {
-        color: color.deep,
-        fontWeight: "bold",
-        [style.space]: {
-            margin: style.spaceY(4),
-        },
-        svg: {
-            display: "inline",
-            paddingBottom: "4px",
-            paddingRight: "8px",
-            color: color.black,
+const List = styled.ul`
+    margin: 8px;
+    li {
+        color: ${color.deep};
+        font-weight: bold;
+        ${style.space} {
+            margin: ${style.spaceY(4)};
+        }
+        svg.list-icon {
+            display: inline;
+            height: 0.7em;
+            padding-right: 7px;
+            color: ${color.black};
         },
     },
-});
+`;
 
 const ContentList: FunctionComponent<ListProps> = ({ liElements, Icon = FaSquare }) => {
     const list = liElements.map((liElement, idx) => {
         return (
             <li key={idx}>
-                <Icon />
+                <Icon className="list-icon" />
                 {liElement}
             </li>
         );

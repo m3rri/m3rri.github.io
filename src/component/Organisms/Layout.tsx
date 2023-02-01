@@ -12,60 +12,60 @@ interface LayoutProps {
     asPath: string;
 }
 
-const PaddingAside = styled.div({
-    flex: "1 1 auto",
-    height: "100%",
-    width: "8px",
-});
+const PaddingAside = styled.div`
+    flex: 1 1 auto;
+    height: 100%;
+    width: 8px;
+`;
 
-const Header = styled.header({
-    borderBottom: `1px solid ${color.deep}`,
-    "&.header-get-on": {
-        zIndex: 10,
-        position: "fixed",
-        top: 0,
-        width: "100%",
-    },
-});
+const Header = styled.header`
+    border-bottom: 1px solid ${color.deep};
+    &.header-get-on {
+        z-index: 10;
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+`;
 
-const MainWrapper = styled.div({
-    display: "flex",
-    flexDirection: "row",
-    ".main-area": {
-        flex: "none",
-        margin: "16px 0",
-        padding: 0,
-        width: "100%",
-        [style.lg]: {
-            width: "1000px",
-        },
-    },
-});
+const MainWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    .main-area {
+        flex: none;
+        margin: 16px 0;
+        width: 100%;
+        ${style.lg} {
+            width: 1000px;
+            margin: 16px 12px;
+        }
+    }
+`;
 
-const Footer = styled.footer({
-    background: color.white,
-    borderTop: `1px solid ${color.deep}`,
-    color: color.black,
-    fontSize: "13px",
-    letterSpacing: "-0.01em",
-    padding: "11px",
-    width: "100%",
-    div: {
-        [style.space]: {
-            padding: style.spaceY(4),
-        },
-    },
-    svg: {
-        display: "inline",
-    },
-    "a:hover": {
-        color: color.highlight,
-    },
-    "&.fixed-bottom": {
-        position: "fixed",
-        bottom: 0,
-    },
-});
+const Footer = styled.footer`
+    background: ${color.white};
+    border-top: 1px solid ${color.deep};
+    color: ${color.black};
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    padding: 11px;
+    div {
+        ${style.space} {
+            padding: ${style.spaceY(4)};
+        }
+    }
+    svg {
+        display: inline;
+        vertical-align: middle;
+    }
+    a:hover {
+        color: ${color.highlight};
+    }
+    &.fixed-bottom {
+        position: fixed;
+        bottom: 0;
+    }
+`;
 
 const Layout: FunctionComponent<LayoutProps> = ({ asPath, children }) => {
     const [headerClass, setHeaderClass] = useState("");

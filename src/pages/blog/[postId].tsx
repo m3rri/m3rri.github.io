@@ -9,12 +9,12 @@ import { BlogMeta } from "component/types/Blog";
 import color, { styleConfig as style } from "../../component/Atoms/CssConfig";
 
 const Meta = ({ category, tag }: { category: string[]; tag: string[] }) => {
-    const StyledDiv = styled.div({
-        padding: "8px",
-        div: {
-            fontSize: "14px",
-        },
-    });
+    const StyledDiv = styled.div`
+        padding: 8px;
+        div {
+            font-size: 14px;
+        }
+    `;
 
     return (
         <StyledDiv>
@@ -25,20 +25,18 @@ const Meta = ({ category, tag }: { category: string[]; tag: string[] }) => {
 };
 
 const Header = ({ title, date }: { title: string; date: string }) => {
-    const StyledHeader = styled.header({
-        borderBottom: `1px solid ${color.deep}`,
-        padding: "8px",
-        h1: {
-            color: color.black,
-            fontSize: "25px",
-            fontWeight: "bold",
-            paddingBottom: "4px",
-        },
-        div: {
-            color: color.aaa,
-            fontSize: "14px",
-        },
-    });
+    const StyledHeader = styled.header`
+        border-bottom: 1px solid ${color.deep};
+        padding: 8px;
+        h1 {
+            color: ${color.black};
+            padding-bottom: 4px;
+        }
+        div {
+            color: ${color.aaa};
+            font-size: 14px;
+        }
+    `;
 
     return (
         <StyledHeader>
@@ -81,25 +79,25 @@ const BlogLink = ({ data, type }: { data: BlogMeta; type: number }) => {
 };
 
 const Footer = ({ prev, next }: { prev: BlogMeta; next: BlogMeta }) => {
-    const StyledFooter = styled.footer({
-        borderTop: `1px solid ${color.deep}`,
-        display: "flex",
-        flexDirection: "column",
-        padding: "4px 8px 0",
-        [style.md]: {
-            flexDirection: "row",
-        },
-        [style.lg]: {
-            paddingLeft: 0,
-            paddingRight: 0,
-        },
-        "div:first-child": {
-            flex: "1 1 0%",
-        },
-        "div:last-child": {
-            textAlign: "right",
-        },
-    });
+    const StyledFooter = styled.footer`
+        border-top: 1px solid ${color.deep};
+        display: flex;
+        flex-direction: column;
+        padding: 4px 8px 5px;
+        ${style.md} {
+            flex-direction: row;
+        }
+        ${style.lg} {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        div:first-child {
+            flex: 1 1 0%;
+        }
+        div:last-child {
+            text-align: right;
+        }
+    `;
 
     return (
         <StyledFooter>
@@ -113,31 +111,31 @@ const Footer = ({ prev, next }: { prev: BlogMeta; next: BlogMeta }) => {
     );
 };
 
-const PostWrapper = styled.div({
-    border: "0",
-    margin: "-16px 0",
-    [style.lg]: {
-        borderLeft: `1px solid ${color.deep}`,
-        borderRight: `1px solid ${color.deep}`,
-        marginLeft: 0,
-        marginRight: 0,
-    },
-    ".markdown-body": {
-        padding: "12px 20px",
-        [style.lg]: {
-            paddingLeft: "16px",
-            paddingRight: "16px",
-        },
-    },
-    ".end-of-post": {
-        color: color.def,
-        padding: "8px 8px0 8px",
-        [style.lg]: {
-            paddingLeft: 0,
-            paddingRight: 0,
-        },
-    },
-});
+const PostWrapper = styled.div`
+    border: 0;
+    margin: -16px 0;
+    ${style.lg} {
+        border-left: 1px solid ${color.deep};
+        border-right: 1px solid ${color.deep};
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .markdown-body {
+        padding: 12px 20px;
+        ${style.lg} {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    }
+    .end-of-post {
+        color: ${color.def};
+        padding: 8px 8px0 8px;
+        ${style.lg} {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+`;
 
 const BlogPost: NextPage = ({ post, prev, next }: any) => {
     const { title, date, category, tag, content } = post;
