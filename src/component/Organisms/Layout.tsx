@@ -31,10 +31,10 @@ const Header = styled.header({
 const MainWrapper = styled.div({
     display: "flex",
     flexDirection: "row",
-    main: {
+    ".main-area": {
         flex: "none",
         margin: "16px 0",
-        padding: "0 12px",
+        padding: 0,
         width: "100%",
         [style.lg]: {
             width: "1000px",
@@ -72,6 +72,7 @@ const Layout: FunctionComponent<LayoutProps> = ({ asPath, children }) => {
     const [scrollState, setScrollState] = useState(0);
     const [footerClass, setFooterClass] = useState("");
     const mainArea = useRef<HTMLElement>(null);
+    const thisYear = new Date().getFullYear();
 
     useEffect(() => {
         const setFooter = () => {
@@ -113,7 +114,7 @@ const Layout: FunctionComponent<LayoutProps> = ({ asPath, children }) => {
             </Header>
             <MainWrapper>
                 <PaddingAside />
-                <main className="mainArea" ref={mainArea}>
+                <main className="main-area" ref={mainArea}>
                     {children}
                 </main>
                 <PaddingAside />
@@ -128,7 +129,7 @@ const Layout: FunctionComponent<LayoutProps> = ({ asPath, children }) => {
                         <a target={"_blank"}> https://github.com/m3rri</a>
                     </Link>
                 </div>
-                <div>© 2022 KimHyeRi. All rights reserved.</div>
+                <div>© 2022-{thisYear} KimHyeRi. All rights reserved.</div>
             </Footer>
         </div>
     );

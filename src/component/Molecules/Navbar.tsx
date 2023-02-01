@@ -64,8 +64,10 @@ const Nav = styled.nav({
             flexDirection: "column",
             fontSize: "14px",
             margin: "16px -8px 0 -8px",
-            "& .navbar-menu:not(:first-of-type)": {
-                borderTop: `1px solid ${color.deep}`,
+            "& .navbar-menu": {
+                [style.space]: {
+                    borderTop: `1px solid ${color.deep}`,
+                },
             },
             [style.md]: {
                 flexDirection: "row",
