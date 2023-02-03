@@ -1,11 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from "next";
 import Link from "next/link";
+import Head from "next/head";
 import { css } from "@emotion/react";
-import MainArticle from "component/Molecules/MainArticle";
 import { getAllSortedPost } from "data/blog";
 import { BlogMeta } from "component/types/Blog";
 import color, { styleConfig as style } from "component/Atoms/CssConfig";
+import MainArticle from "component/Molecules/MainArticle";
+import { BLOG_NAME } from "component/Molecules/Navbar";
 
 const emptyArticle = css`
     padding: 96px 0;
@@ -63,10 +65,16 @@ const Blog: NextPage = ({ fivePostByCategory, params }: any) => {
 
     return fivePostByCategory.length === 0 ? (
         <div css={emptyArticle}>
+            <Head>
+                <title>{BLOG_NAME} - Blog</title>
+            </Head>
             <MainArticle articleName={"Blog"} />
         </div>
     ) : (
         <div css={articleWrapper}>
+            <Head>
+                <title>{BLOG_NAME} - Blog</title>
+            </Head>
             {fivePostByCategory.map((cateInfo: { category: string; postList: BlogMeta[] }) => {
                 return (
                     <MainArticle
