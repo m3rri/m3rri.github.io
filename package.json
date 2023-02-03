@@ -1,35 +1,52 @@
 {
-  "name": "next-blog",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "node src/script/blogCache.js && next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "export": "next export",
-    "stack": "node src/script/blogCache.js"
-  },
-  "dependencies": {
-    "@nivo/core": "^0.79.0",
-    "@nivo/line": "^0.79.1",
-    "github-markdown-css": "^5.1.0",
-    "gray-matter": "^4.0.3",
-    "next": "12.1.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-icons": "^4.4.0",
-    "react-markdown": "^8.0.2"
-  },
-  "devDependencies": {
-    "@tailwindcss/jit": "^0.1.18",
-    "@types/node": "17.0.21",
-    "@types/react": "17.0.39",
-    "autoprefixer": "^10.4.2",
-    "eslint": "8.10.0",
-    "eslint-config-next": "12.1.0",
-    "postcss": "^8.4.8",
-    "tailwindcss": "^3.0.23",
-    "typescript": "4.6.2"
-  }
+    "name": "next-blog",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "node src/script/blogCache.js && next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "export": "next export",
+        "stack": "node src/script/blogCache.js"
+    },
+    "dependencies": {
+        "@emotion/babel-preset-css-prop": "^11.10.0",
+        "@emotion/react": "^11.10.5",
+        "@emotion/styled": "^11.10.5",
+        "@nivo/core": "^0.79.0",
+        "@nivo/line": "^0.79.1",
+        "github-markdown-css": "^5.1.0",
+        "gray-matter": "^4.0.3",
+        "next": "12.1.0",
+        "react": "17.0.2",
+        "react-dom": "17.0.2",
+        "react-icons": "^4.4.0",
+        "react-markdown": "^8.0.2"
+    },
+    "devDependencies": {
+        "@emotion/babel-plugin": "^11.10.5",
+        "@types/node": "17.0.21",
+        "@types/react": "17.0.39",
+        "eslint": "8.10.0",
+        "eslint-config-next": "12.1.0",
+        "typescript": "4.6.2"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }

@@ -1,11 +1,18 @@
-import MainArticle from 'component/Molecules/MainArticle';
-import type { NextPage } from 'next';
+/** @jsxImportSource @emotion/react */
+import type { NextPage } from "next";
+import { css } from "@emotion/react";
+import MainArticle from "component/Molecules/MainArticle";
 
 const Portfolio: NextPage = () => {
-  return <div className="mt-4">
-    <MainArticle articleName="🗃Portfolio">
-    </MainArticle>
-  </div>;
-}
+    return (
+        <div
+            css={css`
+                margin-top: 16px;
+            `}
+        >
+            <MainArticle articleName="🗃Portfolio"></MainArticle>
+        </div>
+    );
+};
 
 export default Portfolio;

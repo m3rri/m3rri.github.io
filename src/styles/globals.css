@@ -1,6 +1,43 @@
-@tailwind base;
-@tailwind components;
-.markdown-body code {
-    color: #329F5B;
+* {
+    color: #333;
+    font-size: 14px;
 }
-@tailwind utilities;
+body {
+    align-self: center;
+    margin: 0;
+}
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+h2 {
+    font-size: 16px;
+    font-weight: bold;
+}
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+button {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 18px;
+}
+ul:not(.markdown-body ul) {
+    list-style: none;
+    padding-inline-start: 0;
+}
+ul:not(.markdown-body ul) ul {
+    padding-inline-start: 1.3rem;
+}
+.markdown-body code {
+    color: #329f5b;
+}
+.has-link:hover {
+    color: #e5c2c0;
+}
+.sr-only {
+    display: none;
+}
