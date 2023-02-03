@@ -1,0 +1,1 @@
+{"pageProps":{"categoryInfo":{"request":"java","parent":"backend"},"fivePostByCategory":{"java":[{"id":"20220816","title":"What happens when jdk compiles the generic type <T>","date":"2022-08-16","category":["backend","java"],"tag":["Generic","Type Erasure","ClassCastException"]}]}},"__N_SSG":true}
