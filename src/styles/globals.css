@@ -22,6 +22,8 @@ button {
     background: transparent;
     border: 0;
     cursor: pointer;
+    font-size: 13px;
+    line-height: 18px;
 }
 ul:not(.markdown-body ul) {
     list-style: none;

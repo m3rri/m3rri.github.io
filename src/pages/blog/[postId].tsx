@@ -91,10 +91,10 @@ const Footer = ({ prev, next }: { prev: BlogMeta; next: BlogMeta }) => {
             padding-left: 0;
             padding-right: 0;
         }
-        div:first-child {
+        div:first-of-type {
             flex: 1 1 0%;
         }
-        div:last-child {
+        div:last-of-type {
             text-align: right;
         }
     `;

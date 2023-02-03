@@ -62,8 +62,9 @@ const Footer = styled.footer`
         color: ${color.highlight};
     }
     &.fixed-bottom {
-        position: fixed;
         bottom: 0;
+        position: fixed;
+        width: 100%;
     }
 `;
 

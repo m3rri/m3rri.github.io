@@ -44,7 +44,7 @@ const home = css`
             align-self: center;
             flex: 1 1 0%;
         }
-        .home-blog-meta-title-link {
+        .home-blog-meta-title-link div {
             color: ${color.black};
             font-weight: 500;
             &:hover {
@@ -78,7 +78,7 @@ const Home: FunctionComponent<HomeProps> = ({ blogMetaList }) => {
                     AWS / SpringBoot / Next.js / React / Javascript / Oracle / Spring / Java
                 </div>
             </MainArticle>
-            <MainArticle articleLink="blog" articleName="🗳Blog">
+            <MainArticle articleLink="blog" articleName="🧱Blog">
                 {blogMetaList.length > 0 && (
                     <div className="home-blog-meta-list">
                         {blogMetaList.map((blogMeta) => {
@@ -101,7 +101,7 @@ const Home: FunctionComponent<HomeProps> = ({ blogMetaList }) => {
                     </div>
                 )}
             </MainArticle>
-            <MainArticle articleLink="portfolio" articleName="🗃Portfolio" />
+            <MainArticle articleLink="portfolio" articleName="🔮Portfolio" />
         </div>
     );
 };

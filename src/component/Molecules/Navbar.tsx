@@ -85,8 +85,11 @@ const Nav = styled.nav`
 
 const Menu = styled.li`
     ${style.md} {
-        padding: 10px 20px 14px;
-        margin: -10px 0;
+        padding: 10px 20px 7px;
+        margin: -10px 0 -10px -1px;
+        &.active-link-home {
+            padding-bottom: 12px;
+        }
     }
 `;
 
@@ -112,7 +115,13 @@ const link = css`
         margin: -7px -20px;
     }
     &.navbar-menu-active-link {
-        color: ${color.highlight};
+        border-bottom: 6px solid transparent;
+        border-image: linear-gradient(to right, ${color.highlight} 25%, #fff 25%) 1 100%;
+        border-image-slice: 1;
+        ${style.md} {
+            border-image: linear-gradient(to right, ${color.highlight} 100%, #fff) 1 100%;
+            border-image-slice: 1;
+        }
     }
 `;
 
@@ -121,7 +130,11 @@ const Navbar: FunctionComponent<NavbarProps> = ({ menuList, activePath }) => {
     const dummyMenu = (key = "key") => <Menu key={key} className="navbar-menu" />;
     const _menuList = menuList.map((menu, idx) => {
         return (
-            <Menu key={`${idx}_0`} css={notDummyMenu} className="navbar-menu">
+            <Menu
+                key={`${idx}_0`}
+                css={notDummyMenu}
+                className={`navbar-menu ${activePath != "/" || "active-link-home"}`}
+            >
                 {menu.children && menu.children.length > 0 ? (
                     <DropdownMenu menu={menu} activePath={activePath} />
                 ) : (

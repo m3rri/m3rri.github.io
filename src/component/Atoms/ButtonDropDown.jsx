@@ -6,7 +6,7 @@ const DropDownButton = styled.button`
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: 8px 16px 8px 12px;
+    padding: 9px 16px 9px 12px;
     width: 100%;
     &:hover {
         border: 1 solid ${color.light};
@@ -14,8 +14,8 @@ const DropDownButton = styled.button`
         transition-duration: 500ms;
     }
     ${style.md} {
-        padding: 14px 12px;
-        margin: -14px -20px;
+        padding: 16px 12px 7px;
+        margin: -14px -20px -7px;
         width: auto;
     }
 `;

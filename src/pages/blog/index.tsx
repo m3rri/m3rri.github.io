@@ -5,7 +5,7 @@ import { css } from "@emotion/react";
 import MainArticle from "component/Molecules/MainArticle";
 import { getAllSortedPost } from "data/blog";
 import { BlogMeta } from "component/types/Blog";
-import color, { styleConfig as style } from "../../component/Atoms/CssConfig";
+import color, { styleConfig as style } from "component/Atoms/CssConfig";
 
 const emptyArticle = css`
     padding: 96px 0;
@@ -36,7 +36,7 @@ const articleWrapper = css`
         align-self: center;
         flex: 1 1 0%;
     }
-    .blog-article-meta-title-link {
+    .blog-article-meta-title-link div {
         color: ${color.black};
         font-weight: 500;
         &:hover {
@@ -69,7 +69,11 @@ const Blog: NextPage = ({ fivePostByCategory, params }: any) => {
         <div css={articleWrapper}>
             {fivePostByCategory.map((cateInfo: { category: string; postList: BlogMeta[] }) => {
                 return (
-                    <MainArticle key={cateInfo.category} articleName={cateInfo.category}>
+                    <MainArticle
+                        key={cateInfo.category}
+                        articleName={cateInfo.category}
+                        articleLink={`blog/category/${cateInfo.category}`}
+                    >
                         <div className="blog-article-list">
                             {cateInfo.postList.map((post) => {
                                 return (

@@ -55,6 +55,10 @@ const DropDownListWrapper = styled.div`
     }
 `;
 
+const menuActiveLink = css`
+    border-bottom: 6px solid ${color.highlight};
+`;
+
 const DropdownMenu: FunctionComponent<DropDownProps> = ({ menu, activePath = "" }) => {
     const DROPDOWN_PREFIX = "dropdown_";
     const [toggleLi, setToggleLi] = useState("none");
@@ -102,9 +106,9 @@ const DropdownMenu: FunctionComponent<DropDownProps> = ({ menu, activePath = "" 
             <DropDownButton
                 data-dropdown-for={`${DROPDOWN_PREFIX}${name}`}
                 onClick={() => setToggleLi(toggleLi === "none" ? "" : "none")}
-                css={activePath.startsWith(url) ? { color: color.highlight } : {}}
+                css={activePath.startsWith(url) ? menuActiveLink : {}}
             >
-                {name} 🗂
+                {name} 📔
             </DropDownButton>
             <DropDownListWrapper
                 id={`${DROPDOWN_PREFIX}${name}`}
