@@ -38,3 +38,7 @@ yarn-error.log*
 # github action
 deploy_key
 deploy_key.pub
+
+# seo
+/public/robots.txt
+/public/sitemap*.xml
