@@ -7,9 +7,6 @@ const config = {
             {
                 userAgent: "*",
                 disallow: ["/404"],
-            },
-            {
-                userAgent: "*",
                 allow: "/",
             },
         ],

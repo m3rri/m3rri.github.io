@@ -3,8 +3,8 @@ name: GitHub Pages
 on:
     push:
         branches:
-            # - main
-            - "release/**"
+            - main
+            #- "release/**"
     workflow_dispatch:
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
 
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v3
-              if: ${{ github.ref == 'refs/heads/release/seo-optimization' }}
+              if: ${{ github.ref == 'refs/heads/main' }}
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./out
