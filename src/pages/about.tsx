@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { ReactNode } from "react";
 import type { NextPage } from "next";
+import Head from "next/head";
 import { css } from "@emotion/react";
 import { FaStar, FaEnvelope, FaGithub } from "react-icons/fa";
 import { SiAmazonaws, SiSpringboot, SiNextdotjs, SiReact, SiJavascript, SiTypescript, SiOracle } from "react-icons/si";
@@ -8,7 +9,8 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import MainArticle from "component/Molecules/MainArticle";
 import ContentListEmt from "component/Molecules/ContentList";
-import color, { styleConfig as style } from "../component/Atoms/CssConfig";
+import { BLOG_NAME } from "component/Molecules/Navbar";
+import color, { styleConfig as style } from "component/Atoms/CssConfig";
 
 const SkillChart = dynamic(() => import("component/Molecules/SkillChart"), {
     ssr: false,
@@ -129,6 +131,9 @@ const careerLis = getSubLiComponents(careers);
 const About: NextPage = () => {
     return (
         <div css={about}>
+            <Head>
+                <title>{BLOG_NAME} - About</title>
+            </Head>
             <MainArticle articleName="✨Introduce">
                 <ContentListEmt
                     liElements={[

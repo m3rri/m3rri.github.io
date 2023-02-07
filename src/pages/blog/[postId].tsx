@@ -1,12 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import type { GetStaticPropsContext, NextPage } from "next";
 import Link from "next/link";
+import Head from "next/head";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import ReactMarkdown from "react-markdown";
 import { getAllSortedPostId, getPostData, getPrevNextPost } from "data/blog";
 import { BlogMeta } from "component/types/Blog";
-import color, { styleConfig as style } from "../../component/Atoms/CssConfig";
+import color, { styleConfig as style } from "component/Atoms/CssConfig";
+import { BLOG_NAME } from "component/Molecules/Navbar";
 
 const Meta = ({ category, tag }: { category: string[]; tag: string[] }) => {
     const StyledDiv = styled.div`
@@ -142,6 +144,11 @@ const BlogPost: NextPage = ({ post, prev, next }: any) => {
 
     return (
         <PostWrapper>
+            <Head>
+                <title>
+                    {BLOG_NAME} - {title}
+                </title>
+            </Head>
             <Header title={title} date={date} />
             <Meta category={category} tag={tag} />
             <main className="markdown-body">

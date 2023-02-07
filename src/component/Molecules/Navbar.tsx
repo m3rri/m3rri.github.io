@@ -193,3 +193,4 @@ const Navbar: FunctionComponent<NavbarProps> = ({ menuList, activePath }) => {
 };
 
 export default Navbar;
+export { BLOG_NAME };
