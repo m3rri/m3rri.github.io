@@ -1,10 +1,7 @@
 # *
 User-agent: *
-Disallow: /404
-
-# *
-User-agent: *
 Allow: /
+Disallow: /404
 
 # Host
 Host: https://m3rri.github.io
