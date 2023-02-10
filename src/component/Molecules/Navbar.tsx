@@ -6,13 +6,12 @@ import { css } from "@emotion/react";
 import { Menu as MenuType } from "component/types/Menu";
 import DropdownMenu from "./DropdownMenu";
 import color, { styleConfig as style } from "../Atoms/CssConfig";
+import { BLOG_NAME } from "data/store";
 
 interface NavbarProps {
     menuList: MenuType[];
     activePath: string;
 }
-
-const BLOG_NAME = "MERRI`s DEVELOG";
 
 const Nav = styled.nav`
     padding: 7px 8px;

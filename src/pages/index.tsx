@@ -1,18 +1,12 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import HomeComponent from "component/Templates/Home";
-import { BLOG_NAME } from "component/Molecules/Navbar";
 import { getAllSortedPost } from "data/blog";
+import { useTitle } from "data/store";
 
 const Home: NextPage = ({ post }: any) => {
-    return (
-        <>
-            <Head>
-                <title>{BLOG_NAME}</title>
-            </Head>
-            <HomeComponent blogMetaList={post} />
-        </>
-    );
+    useTitle();
+
+    return <HomeComponent blogMetaList={post} />;
 };
 
 export default Home;

@@ -6,6 +6,7 @@ import { getAllSortedPost, getAllSortedCategory } from "data/blog";
 import { BlogMeta } from "component/types/Blog";
 import color, { styleConfig as style } from "component/Atoms/CssConfig";
 import MainArticle from "component/Molecules/MainArticle";
+import { useTitle } from "data/store";
 
 const articleWrapper = css`
     margin-top: 16px;
@@ -60,6 +61,8 @@ const CagegoryList: NextPage = ({ categoryInfo, fivePostByCategory }: any) => {
 
     const parentLabel = parent.toUpperCase();
     const requestLabel = request.charAt(0).toUpperCase() + request.slice(1);
+
+    useTitle(`Blog\\Category\\${requestLabel}`);
 
     return (
         <div>
