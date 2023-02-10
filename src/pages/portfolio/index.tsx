@@ -13,7 +13,7 @@ const Portfolio: NextPage = () => {
                 margin-top: 16px;
             `}
         >
-            <MainArticle articleName="🗃Portfolio"></MainArticle>
+            <MainArticle title="🔮Portfolio"></MainArticle>
         </div>
     );
 };

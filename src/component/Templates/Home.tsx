@@ -70,7 +70,7 @@ const home = css`
 const Home: FunctionComponent<HomeProps> = ({ blogMetaList }) => {
     return (
         <div css={home}>
-            <MainArticle articleLink="about" articleName="✨Stack">
+            <MainArticle link="about" title="✨Stack">
                 <div className="home-skill-chart-wrapper">
                     <SkillChart />
                 </div>
@@ -78,7 +78,7 @@ const Home: FunctionComponent<HomeProps> = ({ blogMetaList }) => {
                     AWS / SpringBoot / Next.js / React / Javascript / Oracle / Spring / Java
                 </div>
             </MainArticle>
-            <MainArticle articleLink="blog" articleName="🧱Blog">
+            <MainArticle link="blog" title="🧱Blog">
                 {blogMetaList.length > 0 && (
                     <div className="home-blog-meta-list">
                         {blogMetaList.map((blogMeta) => {
@@ -101,7 +101,7 @@ const Home: FunctionComponent<HomeProps> = ({ blogMetaList }) => {
                     </div>
                 )}
             </MainArticle>
-            <MainArticle articleLink="portfolio" articleName="🔮Portfolio" />
+            <MainArticle link="portfolio" title="🔮Portfolio" />
         </div>
     );
 };

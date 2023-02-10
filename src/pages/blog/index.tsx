@@ -65,7 +65,7 @@ const Blog: NextPage = ({ fivePostByCategory, params }: any) => {
 
     return fivePostByCategory.length === 0 ? (
         <div css={emptyArticle}>
-            <MainArticle articleName={"Blog"} />
+            <MainArticle title={"Blog"} />
         </div>
     ) : (
         <div css={articleWrapper}>
@@ -73,8 +73,8 @@ const Blog: NextPage = ({ fivePostByCategory, params }: any) => {
                 return (
                     <MainArticle
                         key={cateInfo.category}
-                        articleName={cateInfo.category}
-                        articleLink={`blog/category/${cateInfo.category}`}
+                        title={cateInfo.category}
+                        link={`blog/category/${cateInfo.category}`}
                     >
                         <div className="blog-article-list">
                             {cateInfo.postList.map((post) => {

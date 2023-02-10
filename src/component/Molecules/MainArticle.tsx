@@ -1,15 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { FunctionComponent } from "react";
-import Link from "next/link";
 import styled from "@emotion/styled";
 import color from "../Atoms/CssConfig";
-import ArticleTitle from "../Atoms/BoxTitle";
+import ArticleTitle, { TitleBoxProps } from "../Atoms/TitleBox";
 import EmptyArticle from "../Atoms/EmptyArticle";
-
-interface ArticleProps {
-    articleLink?: String;
-    articleName: String;
-}
 
 const Article = styled.article`
     border: 1px solid ${color.deep};
@@ -17,19 +11,11 @@ const Article = styled.article`
     position: relative;
 `;
 
-const MainArticle: FunctionComponent<ArticleProps> = ({ articleLink, articleName, children }) => {
+const MainArticle: FunctionComponent<TitleBoxProps> = (props) => {
     return (
         <Article>
-            {articleLink ? (
-                <Link href={`/${articleLink}`}>
-                    <a>
-                        <ArticleTitle className="has-link">{articleName}</ArticleTitle>
-                    </a>
-                </Link>
-            ) : (
-                <ArticleTitle>{articleName}</ArticleTitle>
-            )}
-            {children || <EmptyArticle />}
+            <ArticleTitle {...props} />
+            {props.children || <EmptyArticle />}
         </Article>
     );
 };

@@ -108,7 +108,7 @@ const CagegoryList: NextPage = ({ categoryInfo, fivePostByCategory }: any) => {
                     const posts = fivePostByCategory[category];
 
                     return (
-                        <MainArticle key={category} articleName={category} articleLink={`blog/category/${category}`}>
+                        <MainArticle key={category} title={category} link={`blog/category/${category}`}>
                             <div className="blog-article-list">
                                 {posts.map((post: BlogMeta) => {
                                     return (

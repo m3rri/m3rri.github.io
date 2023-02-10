@@ -132,7 +132,7 @@ const About: NextPage = () => {
 
     return (
         <div css={about}>
-            <MainArticle articleName="✨Introduce">
+            <MainArticle title="✨Introduce">
                 <ContentListEmt
                     liElements={[
                         <span key={"content0"} className="about-name">
@@ -153,7 +153,7 @@ const About: NextPage = () => {
                     ]}
                 />
             </MainArticle>
-            <MainArticle articleName="🕊Contact">
+            <MainArticle title="🕊Contact">
                 <ContentListEmt
                     liElements={[
                         <>
