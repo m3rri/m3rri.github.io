@@ -4,56 +4,11 @@ import Link from "next/link";
 import { css } from "@emotion/react";
 import { getAllSortedPost, getAllSortedCategory } from "data/blog";
 import { BlogMeta } from "component/types/Blog";
-import color, { styleConfig as style } from "component/Atoms/CssConfig";
+import color from "component/Atoms/CssConfig";
+import articleWrapper from "component/Atoms/ArticleWrapper";
 import MainArticle from "component/Molecules/MainArticle";
 import { useTitle } from "data/store";
-
-const articleWrapper = css`
-    margin-top: 16px;
-    article {
-        ${style.space} {
-            margin: ${style.spaceY(32)};
-        }
-    }
-    .blog-article-list {
-        margin: 8px 0 6px;
-        min-height: 150px;
-        padding: 0 4px;
-    }
-    .blog-article {
-        display: flex;
-        flex-direction: row;
-        padding: 12px 8px;
-        ${style.space} {
-            margin: ${style.spaceY(6)};
-            border-top: 1px solid ${color.efefef};
-        }
-    }
-    .blog-article-meta {
-        align-self: center;
-        flex: 1 1 0%;
-    }
-    .blog-article-meta-title-link div {
-        color: ${color.black};
-        font-weight: 500;
-        &:hover {
-            color: ${color.aaa};
-        }
-    }
-    .blog-article-meta-etc {
-        align-self: center;
-        color: ${color.light};
-        cursor: default;
-        font-size: 12px;
-        padding-top: 3px;
-    }
-    .blog-article-meta-date {
-        color: ${color.aaa};
-        flex: none;
-        font-size: 12px;
-        padding-top: 3px;
-    }
-`;
+import BlogMetaList from "component/Molecules/BlogMetaList";
 
 const CagegoryList: NextPage = ({ categoryInfo, fivePostByCategory }: any) => {
     const { request, parent } = categoryInfo;
@@ -109,23 +64,7 @@ const CagegoryList: NextPage = ({ categoryInfo, fivePostByCategory }: any) => {
 
                     return (
                         <MainArticle key={category} title={category} link={`blog/category/${category}`}>
-                            <div className="blog-article-list">
-                                {posts.map((post: BlogMeta) => {
-                                    return (
-                                        <div key={post.id} className="blog-article">
-                                            <div className="blog-article-meta">
-                                                <Link href={`/blog/${post.id}`}>
-                                                    <a className="blog-article-meta-title-link">
-                                                        <div>{post.title}</div>
-                                                    </a>
-                                                </Link>
-                                                <div className="blog-article-meta-etc">#{post.tag.join("#")}</div>
-                                            </div>
-                                            <span className="blog-article-meta-date">{post.date}</span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                            <BlogMetaList blogMetaList={posts} className="min-h-150" />
                         </MainArticle>
                     );
                 })}

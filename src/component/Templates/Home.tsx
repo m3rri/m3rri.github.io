@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { FunctionComponent } from "react";
-import Link from "next/link";
 import { css } from "@emotion/react";
 import { BlogMeta } from "component/types/Blog";
 import MainArticle from "component/Molecules/MainArticle";
 import dynamic from "next/dynamic";
-import color, { styleConfig as style } from "../Atoms/CssConfig";
+import articleWrapper from "component/Atoms/ArticleWrapper";
+import BlogMetaList from "component/Molecules/BlogMetaList";
 
 const SkillChart = dynamic(() => import("component/Molecules/SkillChart"), { ssr: false });
 
@@ -14,12 +14,6 @@ interface HomeProps {
 }
 
 const home = css`
-    margin: 16px 16px 0;
-    article {
-        ${style.space} {
-            margin: ${style.spaceY(32)};
-        }
-    }
     .home-skill-chart-wrapper {
         height: 384px;
     }
@@ -27,49 +21,16 @@ const home = css`
         font-size: 15px;
         padding: 12px 20px;
     }
-    .home-blog-meta-list {
-        margin: 8px 0 6px;
-        min-height: 300px;
-        padding: 0 4px;
-        .home-blog-meta {
-            display: flex;
-            flex-direction: row;
-            padding: 12px 8px;
-            ${style.space} {
-                margin: ${style.spaceY(6)};
-                border-top: 1px solid ${color.efefef};
-            }
-        }
-        .home-blog-meta-title-wrapper {
-            align-self: center;
-            flex: 1 1 0%;
-        }
-        .home-blog-meta-title-link div {
-            color: ${color.black};
-            font-weight: 500;
-            &:hover {
-                color: ${color.aaa};
-            }
-        }
-        .home-blog-meta-etc {
-            align-self: center;
-            color: ${color.light};
-            cursor: default;
-            font-size: 12px;
-            padding-top: 3px;
-        }
-        .home-blog-meta-date {
-            color: ${color.aaa};
-            flex: none;
-            font-size: 12px;
-            padding-top: 3px;
-        }
-    }
 `;
 
 const Home: FunctionComponent<HomeProps> = ({ blogMetaList }) => {
     return (
-        <div css={home}>
+        <div
+            css={css`
+                ${articleWrapper};
+                ${home};
+            `}
+        >
             <MainArticle link="about" title="✨Stack">
                 <div className="home-skill-chart-wrapper">
                     <SkillChart />
@@ -79,27 +40,7 @@ const Home: FunctionComponent<HomeProps> = ({ blogMetaList }) => {
                 </div>
             </MainArticle>
             <MainArticle link="blog" title="🧱Blog">
-                {blogMetaList.length > 0 && (
-                    <div className="home-blog-meta-list">
-                        {blogMetaList.map((blogMeta) => {
-                            return (
-                                <div key={blogMeta.id} className="home-blog-meta">
-                                    <div className="home-blog-meta-title-wrapper">
-                                        <Link href={`/blog/${blogMeta.id}`}>
-                                            <a className="home-blog-meta-title-link">
-                                                <div>{blogMeta.title}</div>
-                                            </a>
-                                        </Link>
-                                        <div className="home-blog-meta-etc">
-                                            {blogMeta.category[1]} | #{blogMeta.tag.join(" #")}
-                                        </div>
-                                    </div>
-                                    <span className="home-blog-meta-date">{blogMeta.date}</span>
-                                </div>
-                            );
-                        })}
-                    </div>
-                )}
+                <BlogMetaList blogMetaList={blogMetaList} />
             </MainArticle>
             <MainArticle link="portfolio" title="🔮Portfolio" />
         </div>

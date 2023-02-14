@@ -41,3 +41,9 @@ ul:not(.markdown-body ul) ul {
 .sr-only {
     display: none;
 }
+div.min-h-150 {
+    min-height: 150px;
+}
+div.min-h-300 {
+    min-height: 300px;
+}
