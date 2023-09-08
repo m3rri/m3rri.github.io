@@ -103,7 +103,7 @@ const techs = [
 const careers = [
     {
         name: makeLink("Seegene. Inc", "https://www.seegene.co.kr/"),
-        value: "2021.11.~ Insilico Platform",
+        value: "2021.11.~ SW Lab - Service platform",
     },
     {
         name: makeLink("KHANTECH", "https://www.khantech.co.kr/"),

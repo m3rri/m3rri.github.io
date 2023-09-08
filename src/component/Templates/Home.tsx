@@ -36,7 +36,7 @@ const Home: FunctionComponent<HomeProps> = ({ blogMetaList }) => {
                     <SkillChart />
                 </div>
                 <div className="home-skill-set">
-                    AWS / SpringBoot / Next.js / React / Javascript / Oracle / Spring / Java
+                    AWS / SpringBoot / Java / Next.js / React / Javascript / Oracle / Spring
                 </div>
             </MainArticle>
             <MainArticle link="blog" title="🧱Blog">
