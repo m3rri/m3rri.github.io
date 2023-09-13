@@ -4,6 +4,9 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { Prism as SyntaxHighligher } from "react-syntax-highlighter";
+import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { getAllSortedPostId, getPostData, getPrevNextPost } from "data/blog";
 import { BlogMeta } from "component/types/Blog";
 import color, { styleConfig as style } from "component/Atoms/CssConfig";
@@ -128,6 +131,14 @@ const PostWrapper = styled.div`
             padding-right: 16px;
         }
     }
+    .markdown-body pre div,
+    .markdown-body pre div code {
+        background: none !important;
+    }
+    .markdown-body img {
+        display: block;
+        margin: 1rem auto;
+    }
     .end-of-post {
         color: ${color.def};
         padding: 8px 8px0 8px;
@@ -148,7 +159,23 @@ const BlogPost: NextPage = ({ post, prev, next }: any) => {
             <Header title={title} date={date} />
             <Meta category={category} tag={tag} />
             <main className="markdown-body">
-                <ReactMarkdown>{content}</ReactMarkdown>
+                <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                        code({ node, inline, className, children, ...props }) {
+                            const match = /language-(\w+)/.exec(className || "");
+                            return !inline && match ? (
+                                <SyntaxHighligher language={match[1]} PreTag="div" {...props} style={materialLight}>
+                                    {String(children).replace(/\n$/, "")}
+                                </SyntaxHighligher>
+                            ) : (
+                                <code {...props}>{children}</code>
+                            );
+                        },
+                    }}
+                >
+                    {content}
+                </ReactMarkdown>
             </main>
             <div className="end-of-post">/end of {title}</div>
             <Footer prev={prev} next={next} />
