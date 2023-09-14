@@ -59,3 +59,17 @@ export function getPrevNextPost(id) {
         next,
     };
 }
+
+export function getNearPost(id) {
+    const allPost = getAllSortedPost();
+    const allPostId = getAllSortedPostId();
+    const index = allPostId.indexOf(id);
+    const nearPosts =
+        index <= 2
+            ? allPost.slice(0, 5)
+            : index >= allPostId.length - 1 - 2
+            ? allPost.slice(allPostId.length - 5, allPostId.length)
+            : allPost.slice(index - 2, index + 3);
+
+    return nearPosts;
+}

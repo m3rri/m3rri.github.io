@@ -13,7 +13,6 @@ const emptyArticle = css`
 `;
 
 const Blog: NextPage = ({ fivePostByCategory, params }: any) => {
-    console.log(params);
     useTitle("Blog");
 
     return fivePostByCategory.length === 0 ? (
