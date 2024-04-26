@@ -68,12 +68,26 @@ const BlogLink = ({ data, type }: { data: BlogMeta; type: number }) => {
             color: ${color.aaa};
         }
     `;
+    const nextPrev = css`
+        font-size: 0.85rem;
+    `;
 
     if (data === null) {
         return <span css={emtpyLinked}>{text}글이 없습니다</span>;
     } else {
         const { id, title } = data;
-        const link = type > 0 ? `${title} 👉` : `👈 ${title}`;
+        const link =
+            type > 0 ? (
+                <>
+                    {title}
+                    <span css={nextPrev}>(다음글)</span>
+                </>
+            ) : (
+                <>
+                    <span css={nextPrev}>(이전글)</span>
+                    {title}
+                </>
+            );
 
         return (
             <Link href={`/blog/${id}`}>
@@ -111,9 +125,9 @@ const Footer = ({ prev, next, nearPost }: { prev: BlogMeta; next: BlogMeta; near
                 </div>
             </StyledFooter>
             <div style={{ borderTop: `1px solid ${color.deep}`, padding: "8px" }}>
-                <div>
-                    <span style={{ fontWeight: "bold" }}>CONTENT LIST - </span>
-                    <span style={{ color: color.deep, fontWeight: "bold" }}>MERRI'S DEVELOG 😎</span>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <span style={{ fontWeight: "bold" }}>CONTENT LIST</span>
+                    <span style={{ color: color.light, fontWeight: "bold" }}>MERRI's DEVELOG</span>
                 </div>
                 <div>
                     {nearPost.map((post) => {

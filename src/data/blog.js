@@ -66,10 +66,10 @@ export function getNearPost(id) {
     const index = allPostId.indexOf(id);
     const nearPosts =
         index <= 2
-            ? allPost.slice(0, 5)
+            ? allPost.slice(0, 6)
             : index >= allPostId.length - 1 - 2
-            ? allPost.slice(allPostId.length - 5, allPostId.length)
-            : allPost.slice(index - 2, index + 3);
+            ? allPost.slice(allPostId.length - 6, allPostId.length)
+            : allPost.slice(index - 3, index + 3);
 
-    return nearPosts;
+    return nearPosts.filter((post) => post.id != id);
 }
