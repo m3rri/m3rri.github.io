@@ -78,7 +78,9 @@ const DropdownMenu: FunctionComponent<DropDownProps> = ({ menu, activePath = "" 
                         return (
                             <li key={`${i}-${j}`}>
                                 <Link href={`${url}${child.url}`}>
-                                    <a className={dropdownActiveLink}>{child.name}</a>
+                                    <a className={dropdownActiveLink} onClick={(e) => setToggleLi("none")}>
+                                        {child.name}
+                                    </a>
                                 </Link>
                             </li>
                         );
