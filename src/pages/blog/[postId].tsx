@@ -127,7 +127,7 @@ const Footer = ({ prev, next, nearPost }: { prev: BlogMeta; next: BlogMeta; near
             <div style={{ borderTop: `1px solid ${color.deep}`, padding: "8px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <span style={{ fontWeight: "bold" }}>CONTENT LIST</span>
-                    <span style={{ color: color.light, fontWeight: "bold" }}>MERRI's DEVELOG</span>
+                    <span style={{ color: color.light, fontWeight: "bold" }}>MERRI＇s DEVELOG</span>
                 </div>
                 <div>
                     {nearPost.map((post) => {
