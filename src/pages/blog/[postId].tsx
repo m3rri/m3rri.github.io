@@ -7,9 +7,10 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighligher } from "react-syntax-highlighter";
 import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { getAllSortedPostId, getPostData, getPrevNextPost } from "data/blog";
+import { getAllSortedPostId, getPostData, getPrevNextPost, getNearPost } from "data/blog";
 import { BlogMeta } from "component/types/Blog";
 import color, { styleConfig as style } from "component/Atoms/CssConfig";
+import BlogMetaBox from "component/Atoms/BlogMetaBox";
 import { useTitle } from "data/store";
 
 const Meta = ({ category, tag }: { category: string[]; tag: string[] }) => {
@@ -67,12 +68,26 @@ const BlogLink = ({ data, type }: { data: BlogMeta; type: number }) => {
             color: ${color.aaa};
         }
     `;
+    const nextPrev = css`
+        font-size: 0.85rem;
+    `;
 
     if (data === null) {
         return <span css={emtpyLinked}>{text}글이 없습니다</span>;
     } else {
         const { id, title } = data;
-        const link = type > 0 ? `${title} 👉` : `👈 ${title}`;
+        const link =
+            type > 0 ? (
+                <>
+                    {title}
+                    <span css={nextPrev}>(다음글)</span>
+                </>
+            ) : (
+                <>
+                    <span css={nextPrev}>(이전글)</span>
+                    {title}
+                </>
+            );
 
         return (
             <Link href={`/blog/${id}`}>
@@ -82,18 +97,14 @@ const BlogLink = ({ data, type }: { data: BlogMeta; type: number }) => {
     }
 };
 
-const Footer = ({ prev, next }: { prev: BlogMeta; next: BlogMeta }) => {
+const Footer = ({ prev, next, nearPost }: { prev: BlogMeta; next: BlogMeta; nearPost: BlogMeta[] }) => {
     const StyledFooter = styled.footer`
         border-top: 1px solid ${color.deep};
         display: flex;
         flex-direction: column;
-        padding: 4px 8px 5px;
+        padding: 8px;
         ${style.md} {
             flex-direction: row;
-        }
-        ${style.lg} {
-            padding-left: 0;
-            padding-right: 0;
         }
         div:first-of-type {
             flex: 1 1 0%;
@@ -104,14 +115,27 @@ const Footer = ({ prev, next }: { prev: BlogMeta; next: BlogMeta }) => {
     `;
 
     return (
-        <StyledFooter>
-            <div>
-                <BlogLink data={prev} type={-1} />
+        <>
+            <StyledFooter>
+                <div>
+                    <BlogLink data={prev} type={-1} />
+                </div>
+                <div>
+                    <BlogLink data={next} type={1} />
+                </div>
+            </StyledFooter>
+            <div style={{ borderTop: `1px solid ${color.deep}`, padding: "8px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <span style={{ fontWeight: "bold" }}>CONTENT LIST</span>
+                    <span style={{ color: color.light, fontWeight: "bold" }}>MERRI's DEVELOG</span>
+                </div>
+                <div>
+                    {nearPost.map((post) => {
+                        return <BlogMetaBox key={post.id} {...post} />;
+                    })}
+                </div>
             </div>
-            <div>
-                <BlogLink data={next} type={1} />
-            </div>
-        </StyledFooter>
+        </>
     );
 };
 
@@ -149,7 +173,7 @@ const PostWrapper = styled.div`
     }
 `;
 
-const BlogPost: NextPage = ({ post, prev, next }: any) => {
+const BlogPost: NextPage = ({ post, prev, next, nearPost }: any) => {
     const { title, date, category, tag, content } = post;
 
     useTitle(title);
@@ -178,7 +202,7 @@ const BlogPost: NextPage = ({ post, prev, next }: any) => {
                 </ReactMarkdown>
             </main>
             <div className="end-of-post">/end of {title}</div>
-            <Footer prev={prev} next={next} />
+            <Footer prev={prev} next={next} nearPost={nearPost} />
         </PostWrapper>
     );
 };
@@ -196,12 +220,14 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
     const { postId } = params!;
     const post = getPostData(postId);
     const { prev, next } = getPrevNextPost(postId);
+    const nearPost = getNearPost(postId);
 
     return {
         props: {
             post,
             prev,
             next,
+            nearPost,
         },
     };
 }
