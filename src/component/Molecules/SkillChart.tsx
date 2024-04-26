@@ -1,8 +1,8 @@
-import { ResponsiveLine, Serie, Datum } from "@nivo/line";
+import { ResponsiveLine, Serie } from "@nivo/line";
 
 const skillMap: { [k: string]: String } = {
     java: "Java",
-    spring: "Spring",
+    spring: "Spring(mvc)",
     oracle: "Oracle",
     js: "Javascript",
     react: "React",
@@ -10,9 +10,10 @@ const skillMap: { [k: string]: String } = {
     boot: "SpringBoot",
     aws: "AWS",
     mongo: "mongoDB",
+    springWebFlux: "Spring(web flux)",
 };
 const skillData = [
-    { year: "2017", data: [skillMap.java, skillMap.oracle, skillMap.spring] },
+    //{ year: "2017", data: [skillMap.java, skillMap.oracle, skillMap.spring] },
     { year: "2018", data: [skillMap.spring, skillMap.oracle, skillMap.js, skillMap.java] },
     { year: "2019", data: [skillMap.oracle, skillMap.js, skillMap.spring, skillMap.java] },
     { year: "2020", data: [skillMap.js, skillMap.spring, skillMap.oracle, skillMap.java] },
@@ -26,7 +27,11 @@ const skillData = [
     },
     {
         year: "2023",
-        data: [skillMap.boot, skillMap.java, skillMap.aws, skillMap.spring, skillMap.mongo, skillMap.js],
+        data: [skillMap.boot, skillMap.java, skillMap.aws, skillMap.springWebFlux, skillMap.spring, skillMap.mongo],
+    },
+    {
+        year: "2024",
+        data: [skillMap.boot, skillMap.java, skillMap.aws, skillMap.springWebFlux, skillMap.mongo],
     },
 ];
 
@@ -53,7 +58,7 @@ const MyResponsiveLine = () => {
     return (
         <ResponsiveLine
             data={chartData}
-            margin={{ top: 25, right: 110, bottom: 50, left: 40 }}
+            margin={{ top: 25, right: 125, bottom: 50, left: 40 }}
             xScale={{ type: "point" }}
             yScale={{
                 type: "linear",
@@ -101,6 +106,7 @@ const MyResponsiveLine = () => {
                             },
                         },
                     ],
+                    toggleSerie: true,
                 },
             ]}
         />

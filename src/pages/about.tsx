@@ -73,11 +73,11 @@ function getSubLiComponents(list: { name: ReactNode | String; value: String | Re
 const techs = [
     {
         name: <SiAmazonaws className="about-skill-icon" />,
-        value: "EC2, Elastic Beanstalk, RDS, Cognito, CodeDeploy",
+        value: "Lambda, EC2, Elastic Beanstalk, RDS, Cognito, CodeDeploy",
     },
     {
         name: <SiSpringboot className="about-skill-icon" />,
-        value: "JPA, QueryDsl, OAuth2.0, Swagger3.0, RESTful API",
+        value: "MVC/WebFlux, JPA, QueryDsl, OAuth2.0, Swagger3.0, RESTful API",
     },
     {
         name: <SiNextdotjs className="about-skill-icon" />,
