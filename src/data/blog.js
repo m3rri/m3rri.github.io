@@ -36,6 +36,17 @@ export function getAllSortedCategory() {
     return result;
 }
 
+export function getAllSortedTag(){
+    const result = [];
+    const lowerResult = [];
+
+    getAllSortedPost().forEach((post)=>{
+        post.tag.forEach(t=> lowerResult.indexOf(t.toLowerCase())<0 ? result.push(t)&&lowerResult.push(t.toLowerCase()) : null);
+    });
+
+    return result;
+}
+
 export function getPostData(id) {
     const fullPath = path.join(POST_DIR, `${id}.md`);
     const post = fs.readFileSync(fullPath, "utf8");

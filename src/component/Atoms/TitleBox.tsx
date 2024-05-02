@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import color from "./CssConfig";
 
 interface TitleBoxProps {
-    title: String;
+    title?: String;
     link?: String;
 }
 
@@ -23,19 +23,23 @@ const TitleBox = styled.h2`
 `;
 
 const TitleBoxComponent: FunctionComponent<TitleBoxProps> = ({ title, link }) => {
-    return (
-        <>
-            {link ? (
-                <Link href={`/${link}`}>
-                    <a>
-                        <TitleBox className="has-link">{title}</TitleBox>
-                    </a>
-                </Link>
-            ) : (
-                <TitleBox>{title}</TitleBox>
-            )}
-        </>
-    );
+    if(title){
+        return (
+            <>
+                {link ? (
+                    <Link href={`/${link}`}>
+                        <a>
+                            <TitleBox className="has-link">{title}</TitleBox>
+                        </a>
+                    </Link>
+                ) : (
+                    <TitleBox>{title}</TitleBox>
+                )}
+            </>
+        );
+    } else {
+        return <></>;    
+    }
 };
 
 export default TitleBoxComponent;
