@@ -60,12 +60,12 @@ const BlogMetaBox: FunctionComponent<BlogMeta> = ({ id, title, category, tag, da
         </Link>
         <span> |</span>
         {
-            tag.map((t, i)=><>
+            tag.map(t=><span key={t}>
                 <span> </span>
-                <Link key={t} href={`/blog/tag/${t.toLowerCase()}`}>
+                <Link href={`/blog/tag/${t.toLowerCase()}`}>
                     <a>#{t}</a>
                 </Link>
-            </>)
+            </span>)
         }
     </>;
 

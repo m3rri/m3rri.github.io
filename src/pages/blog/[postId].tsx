@@ -19,12 +19,29 @@ const Meta = ({ category, tag }: { category: string[]; tag: string[] }) => {
         div {
             font-size: 14px;
         }
+        a:hover {
+            color: ${color.light}
+        }
     `;
+    const categories = category.map((c, i)=><span key={`category-${c}`}>
+            {i>0 && <span> &gt; </span>}
+            <Link href={`/blog/category/${c}`}>
+                <a>{c}</a>
+            </Link>
+        </span>
+    );
+    const tags = tag.map(t=><span key={`tag-${t}`}>
+            <span> </span>
+            <Link href={`/blog/tag/${t.toLowerCase()}`}>
+                <a>#{t}</a>
+            </Link>
+        </span>
+    );
 
     return (
         <StyledDiv>
-            <div>📂 {category.join(" > ")}</div>
-            <div>🧶 #{tag.join(" #")}</div>
+            <div>📂 {categories}</div>
+            <div>🧶{tags}</div>
         </StyledDiv>
     );
 };
