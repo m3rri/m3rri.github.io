@@ -40,11 +40,11 @@ const Home: FunctionComponent<HomeProps> = ({ blogMetaList, tags }) => {
         >
             <div className="post-tag-wrapper">
                 {tags.map(tag=>
-                    //<Link href={`/blog/tag/${tag.toLowerCase()}`}>
-                        //<a>
+                    <Link href={`/blog/tag/${tag.toLowerCase()}`}>
+                        <a>
                             <div key={tag} className="post-tag">#{tag}</div>
-                        //</div></a>
-                    //</Link>
+                        </a>
+                    </Link>
                 )}
             </div>
             <MainArticle link="blog" title="🧱Recent Posts">

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import type { GetStaticPropsContext, NextPage } from "next";
 import { css } from "@emotion/react";
-import { getAllSortedPost, getAllSortedCategory } from "data/blog";
+import { getAllSortedPost, getAllSortedTag } from "data/blog";
 import { BlogMeta } from "component/types/Blog";
 import color from "component/Atoms/CssConfig";
 import articleWrapper from "component/Atoms/ArticleWrapper";
@@ -55,14 +55,13 @@ export default CagegoryList;
 
 export async function getStaticPaths() {
     return {
-        paths: getAllSortedCategory().map((tag: string) => ({ params: { tag } })),
+        paths: getAllSortedTag().map((tag: string) => ({ params: { tag: tag.toLowerCase() } })),
         fallback: false,
     };
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
     const { tag } = params!;
-    console.log(tag);
 
     if (tag) {
         const allPost: BlogMeta[] = await getAllSortedPost();

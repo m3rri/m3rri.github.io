@@ -28,11 +28,21 @@ const BlogMetaTitleWrapper = styled.div`
 `;
 
 const BlogMetaEtcWrapper = styled.div`
-    align-self: center;
-    color: ${color.light};
-    cursor: default;
-    font-size: 12px;
-    padding-top: 3px;
+    a, span {
+        align-self: center;
+        color: ${color.light};
+        font-size: 12px;
+        padding-top: 3px;
+    }
+    a {
+        cursor: pointer;
+    }
+    span {
+        cursor: default;
+    }
+    a:hover {
+        color: ${color.highlight}
+    }
 `;
 
 const BlogMetaDate = styled.span`
@@ -44,7 +54,20 @@ const BlogMetaDate = styled.span`
 
 const BlogMetaBox: FunctionComponent<BlogMeta> = ({ id, title, category, tag, date }) => {
     const linkUrl = `/blog/${id}`;
-    const etcContent = `${category[1]} | #${tag.join(" #")}`;
+    const etcContent = <>
+        <Link href={`/blog/category/${category[1]}`}>
+            <a>{category[1]}</a>
+        </Link>
+        <span> |</span>
+        {
+            tag.map((t, i)=><>
+                <span> </span>
+                <Link key={t} href={`/blog/tag/${t.toLowerCase()}`}>
+                    <a>#{t}</a>
+                </Link>
+            </>)
+        }
+    </>;
 
     return (
         <BlogMetaWrapper>
