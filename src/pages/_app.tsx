@@ -44,6 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                         strategy="afterInteractive"
                         src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
                     />
+                    <meta name="google-site-verification" content="-IYFAYTqi7mYYCPb6BhJKCcZVcWghBEgTqFyxyXrNBc" />
                 </>
             )}
             <Layout asPath={asPath}>
