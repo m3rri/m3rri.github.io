@@ -37,6 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     }}
                 />
                 <meta name="google-site-verification" content="-IYFAYTqi7mYYCPb6BhJKCcZVcWghBEgTqFyxyXrNBc" />
+                <meta name="naver-site-verification" content="869be3cd7f5f9946dbdd42922f42f54838b579c5" />
             </Head>
             {process.env.NODE_ENV !== "development" && (
                 <>

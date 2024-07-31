@@ -1,6 +1,6 @@
 const config = {
     siteUrl: "https://m3rri.github.io",
-    exclude: ["/404", "/about"],
+    exclude: ["/404", "/about", "/portfolio"],
     generateRobotsTxt: true,
     robotsTxtOptions: {
         policies: [
