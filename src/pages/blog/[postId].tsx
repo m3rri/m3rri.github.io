@@ -6,7 +6,6 @@ import { css } from "@emotion/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighligher } from "react-syntax-highlighter";
-import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { getAllSortedPostId, getPostData, getPrevNextPost, getNearPost } from "data/blog";
 import { BlogMeta } from "component/types/Blog";
 import color, { styleConfig as style } from "component/Atoms/CssConfig";
@@ -20,23 +19,25 @@ const Meta = ({ category, tag }: { category: string[]; tag: string[] }) => {
             font-size: 14px;
         }
         a:hover {
-            color: ${color.light}
+            color: ${color.light};
         }
     `;
-    const categories = category.map((c, i)=><span key={`category-${c}`}>
-            {i>0 && <span> &gt; </span>}
+    const categories = category.map((c, i) => (
+        <span key={`category-${c}`}>
+            {i > 0 && <span> &gt; </span>}
             <Link href={`/blog/category/${c}`}>
                 <a>{c}</a>
             </Link>
         </span>
-    );
-    const tags = tag.map(t=><span key={`tag-${t}`}>
+    ));
+    const tags = tag.map((t) => (
+        <span key={`tag-${t}`}>
             <span> </span>
             <Link href={`/blog/tag/${t.toLowerCase()}`}>
                 <a>#{t}</a>
             </Link>
         </span>
-    );
+    ));
 
     return (
         <StyledDiv>
@@ -172,8 +173,8 @@ const PostWrapper = styled.div`
             padding-right: 16px;
         }
     }
-    .markdown-body pre div,
-    .markdown-body pre div code {
+    .markdown-body > pre {
+        padding: 0;
         background: none !important;
     }
     .markdown-body img {
@@ -206,7 +207,12 @@ const BlogPost: NextPage = ({ post, prev, next, nearPost }: any) => {
                         code({ node, inline, className, children, ...props }) {
                             const match = /language-(\w+)/.exec(className || "");
                             return !inline && match ? (
-                                <SyntaxHighligher language={match[1]} PreTag="div" {...props} style={materialLight}>
+                                <SyntaxHighligher
+                                    language={match[1]}
+                                    {...props}
+                                    style={undefined}
+                                    showLineNumbers={true}
+                                >
                                     {String(children).replace(/\n$/, "")}
                                 </SyntaxHighligher>
                             ) : (
