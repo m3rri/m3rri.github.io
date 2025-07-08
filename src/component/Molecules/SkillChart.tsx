@@ -9,13 +9,14 @@ const skillMap: { [k: string]: String } = {
     next: "Nextjs",
     boot: "SpringBoot",
     aws: "AWS",
+    azure: "Azure",
     mongo: "mongoDB",
     springWebFlux: "Spring(web flux)",
 };
 const skillData = [
     //{ year: "2017", data: [skillMap.java, skillMap.oracle, skillMap.spring] },
-    { year: "2018", data: [skillMap.spring, skillMap.oracle, skillMap.js, skillMap.java] },
-    { year: "2019", data: [skillMap.oracle, skillMap.js, skillMap.spring, skillMap.java] },
+    //{ year: "2018", data: [skillMap.spring, skillMap.oracle, skillMap.js, skillMap.java] },
+    //{ year: "2019", data: [skillMap.oracle, skillMap.js, skillMap.spring, skillMap.java] },
     { year: "2020", data: [skillMap.js, skillMap.spring, skillMap.oracle, skillMap.java] },
     {
         year: "2021",
@@ -32,6 +33,10 @@ const skillData = [
     {
         year: "2024",
         data: [skillMap.boot, skillMap.java, skillMap.aws, skillMap.springWebFlux, skillMap.mongo],
+    },
+    {
+        year: "2025",
+        data: [skillMap.boot, skillMap.java, skillMap.azure],
     },
 ];
 
