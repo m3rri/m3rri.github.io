@@ -177,6 +177,10 @@ const PostWrapper = styled.div`
         padding: 0;
         background: none !important;
     }
+    .markdown-body pre:has(pre) {
+        padding: 0;
+        background: none;
+    }
     .markdown-body img {
         display: block;
         margin: 1rem auto;
