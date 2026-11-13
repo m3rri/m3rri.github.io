@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>쪼르르 — 바탕화면 친구</title>
+  <meta name="description" content="쪼르르 — 바탕화면 위를 돌아다니는 작은 친구들. Windows용 무료 앱.">
+  <link rel="icon" href="img/tray.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fff9f1;
+      --card: #ffffff;
+      --ink: #4a3428;
+      --muted: #8a7466;
+      --line: #6b4a3a;
+      --soft: #f3e6d8;
+      --accent: #f28c8c;
+      --accent-ink: #ffffff;
+      --cheek: #ffc9c9;
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
+      line-height: 1.6;
+    }
+    .hand { font-family: "Gaegu", "Noto Sans KR", sans-serif; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+    section { padding: 64px 0; }
+    h2 {
+      font-family: "Gaegu", sans-serif;
+      font-size: 2.2rem;
+      margin: 0 0 8px;
+      text-align: center;
+    }
+    .sub { text-align: center; color: var(--muted); margin: 0 0 32px; }
+
+    /* 1. 첫 화면 */
+    .hero { padding: 72px 0 56px; text-align: center; }
+    .hero-pets {
+      display: flex; justify-content: center; align-items: flex-end;
+      gap: 4px; margin-bottom: 8px; min-height: 112px;
+    }
+    .hero-pets img { width: 96px; height: 96px; image-rendering: auto; }
+    .hero-pets img:nth-child(2) { width: 120px; height: 120px; }
+    .hero h1 {
+      font-family: "Gaegu", sans-serif;
+      font-size: clamp(2.6rem, 8vw, 4rem);
+      line-height: 1.1;
+      margin: 8px 0 12px;
+    }
+    .hero p.lead { font-size: 1.1rem; color: var(--muted); margin: 0 0 32px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: var(--accent-ink);
+      text-decoration: none; font-weight: 700; font-size: 1.15rem;
+      padding: 16px 32px; border-radius: 999px;
+      border: 3px solid var(--line);
+      box-shadow: 0 5px 0 var(--line);
+      transition: transform .12s, box-shadow .12s;
+    }
+    .btn:hover { transform: translateY(2px); box-shadow: 0 3px 0 var(--line); }
+    .btn:active { transform: translateY(5px); box-shadow: 0 0 0 var(--line); }
+    .btn svg { width: 22px; height: 22px; }
+    .meta { margin-top: 16px; font-size: .92rem; color: var(--muted); min-height: 1.5em; }
+    .meta a { color: var(--muted); }
+
+    /* 2. 캐릭터 */
+    .pets {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .pet {
+      position: relative;
+      background: var(--card);
+      border: 3px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px 20px 18px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: transform .15s;
+    }
+    .pet:hover { transform: translateY(-3px); }
+    .pet:focus-visible { outline: 3px dashed var(--accent); outline-offset: 4px; }
+    .pet .stage {
+      position: relative; height: 128px;
+      display: flex; justify-content: center; align-items: flex-end;
+    }
+    .pet .stage img { width: 128px; height: 128px; }
+    .pet h3 { font-family: "Gaegu", sans-serif; font-size: 1.6rem; margin: 6px 0 2px; }
+    .pet .acts { font-size: .88rem; color: var(--muted); margin: 0; }
+    .bubble {
+      position: absolute; left: 50%; top: -6px;
+      transform: translate(-50%, -100%) scale(.8);
+      background: #fff; border: 2.5px solid var(--line); border-radius: 16px;
+      padding: 6px 14px; white-space: nowrap;
+      font-family: "Gaegu", sans-serif; font-size: 1.15rem; font-weight: 700;
+      opacity: 0; pointer-events: none;
+      transition: opacity .15s, transform .15s;
+    }
+    .bubble::after {
+      content: ""; position: absolute; left: 50%; bottom: -9px;
+      width: 12px; height: 12px; background: #fff;
+      border-right: 2.5px solid var(--line); border-bottom: 2.5px solid var(--line);
+      transform: translateX(-50%) rotate(45deg);
+    }
+    .bubble.show { opacity: 1; transform: translate(-50%, -100%) scale(1); }
+    .hint { text-align: center; color: var(--muted); font-size: .9rem; margin-top: 20px; }
+
+    /* 4. 사용법 */
+    .howto { background: var(--soft); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .step {
+      background: var(--card); border-radius: var(--radius);
+      border: 2px solid #e6d3c2; padding: 20px;
+    }
+    .step b { display: block; font-family: "Gaegu", sans-serif; font-size: 1.4rem; margin-bottom: 4px; }
+    .step p { margin: 0; font-size: .95rem; }
+    kbd {
+      font-family: inherit; font-size: .85em;
+      background: var(--soft); border: 1px solid #d9c3af; border-bottom-width: 3px;
+      border-radius: 6px; padding: 1px 6px; white-space: nowrap;
+    }
+    .more {
+      margin-top: 28px; background: var(--card); border-radius: var(--radius);
+      border: 2px solid #e6d3c2; padding: 8px 20px;
+    }
+    .more summary { cursor: pointer; font-weight: 700; padding: 12px 0; }
+    .more pre {
+      background: var(--soft); border-radius: 12px; padding: 14px;
+      overflow-x: auto; font-size: .85rem; line-height: 1.5;
+    }
+    .more ul { padding-left: 20px; }
+    .more li { margin: 4px 0; }
+    code { font-size: .9em; background: var(--soft); border-radius: 4px; padding: 1px 4px; }
+    pre code { background: none; padding: 0; }
+
+    /* 6. 하단 */
+    footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-size: .9rem; }
+    footer .links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+    footer a { color: var(--ink); font-weight: 500; }
+
+    @media (max-width: 480px) {
+      section { padding: 48px 0; }
+      .hero-pets img { width: 72px; height: 72px; }
+      .hero-pets img:nth-child(2) { width: 96px; height: 96px; }
+      .btn { padding: 14px 24px; font-size: 1.05rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. 첫 화면 -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-pets" aria-hidden="true">
+        <img src="img/cat/walk.png" alt="">
+        <img src="img/default/idle.png" alt="">
+        <img src="img/rabbit/walk.png" alt="" style="transform: scaleX(-1)">
+      </div>
+      <h1>쪼르르</h1>
+      <p class="lead">바탕화면 위를 돌아다니는 작은 친구.<br>일하는 동안 옆에서 놀다가, 말을 걸면 퇴근 시간도 알려 줘요.</p>
+      <a class="btn" id="download"
+         href="https://github.com/m3rri/jjorr-desktop/releases/latest/download/JjorrDesktop-Setup.exe">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+        Windows용 무료 다운로드
+      </a>
+      <p class="meta" id="meta">Windows 10 / 11 · 무료</p>
+    </div>
+  </header>
+
+  <!-- 2. 캐릭터 소개 -->
+  <section id="pets">
+    <div class="wrap">
+      <h2>누구랑 지낼래?</h2>
+      <p class="sub">기본 캐릭터 6마리. 설정에서 언제든 바꿀 수 있고, 내가 그린 그림을 넣을 수도 있어요.</p>
+      <div class="pets" id="petGrid"></div>
+      <p class="hint">카드를 클릭하면 반응하고 말을 걸어요.</p>
+    </div>
+  </section>
+
+  <!-- 4. 사용법 -->
+  <section class="howto" id="howto">
+    <div class="wrap">
+      <h2>이렇게 놀아요</h2>
+      <p class="sub">설치하면 바로 바탕화면에 나타나요. 캐릭터가 그려진 부분만 클릭되고, 나머지는 뒤에 있는 창으로 통과해요.</p>
+      <div class="steps">
+        <div class="step"><b>클릭</b><p>캐릭터마다 여러 동작 중 하나로 반응해요.</p></div>
+        <div class="step"><b>더블클릭</b><p>말풍선으로 말을 걸어요. 세 번에 한 번은 퇴근(또는 마감)까지 남은 시간을 알려 줘요.</p></div>
+        <div class="step"><b>드래그</b><p>원하는 곳으로 옮겨요. 다른 모니터로 옮기면 거기서 돌아다녀요.</p></div>
+        <div class="step"><b>숨기기 / 보이기</b><p><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>P</kbd> 또는 트레이 아이콘 클릭. 단축키는 설정에서 바꿀 수 있어요.</p></div>
+        <div class="step"><b>설정</b><p>캐릭터를 우클릭 → 설정…, 또는 트레이 아이콘 더블클릭. 크기·속도·잠드는 시간·퇴근 시간을 바꿀 수 있어요.</p></div>
+        <div class="step"><b>종료</b><p>캐릭터 우클릭 → 종료, 또는 트레이 아이콘 우클릭 → 종료.</p></div>
+      </div>
+
+      <details class="more">
+        <summary>내 그림으로 캐릭터 만들기</summary>
+        <p>설정 화면에서 <b>새 캐릭터 폴더</b>를 누르면 빈 폴더가 열려요. 상태 이름으로 이미지를 넣으면 끝.</p>
+<pre><code>idle.png      필수. 다른 이미지가 없으면 이 이미지로 대신 보여줘요
+walk.gif      걸을 때
+click_1.gif   클릭할 때 (click_2, click_3 … 여러 개면 무작위)
+sleep.png     오래 입력이 없을 때
+drag.png      끌고 다닐 때
+pet.json      선택. 이름, 크기, 속도, 대사 등</code></pre>
+        <ul>
+          <li>PNG, APNG, GIF, WebP 모두 되고, 투명 배경을 권장해요.</li>
+          <li>오른쪽을 바라보게 그리면 왼쪽으로 걸을 때 자동으로 뒤집혀요.</li>
+          <li>모든 이미지를 같은 캔버스 크기, 같은 위치로 그리면 동작이 바뀔 때 캐릭터가 튀지 않아요.</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <!-- 6. 하단 -->
+  <footer>
+    <div class="wrap">
+      <div class="links">
+        <a href="https://github.com/m3rri/jjorr-desktop">GitHub</a>
+        <a href="https://github.com/m3rri/jjorr-desktop/releases">지난 버전</a>
+        <a href="https://github.com/m3rri/jjorr-desktop/issues">버그 제보 · 의견</a>
+      </div>
+      <p>Windows 10 / 11 (64비트) · 말풍선 폰트 <a href="https://fonts.google.com/specimen/Gaegu">Gaegu</a> (SIL OFL 1.1)</p>
+    </div>
+  </footer>
+
+  <script>
+    // 2. 캐릭터 카드
+    const PETS = [
+      { id: 'default', name: '곰', acts: '점프 · 고개 갸웃 · 볼 감싸기 · 꿀단지 할짝 · 하품',
+        phrases: ['꿀 먹고 싶다', '오늘도 수고했어!', '하암… 졸려', '같이 쉬었다 하자', '꿀단지 어디 뒀더라?'] },
+      { id: 'cat', name: '검은 고양이', acts: '하악질 · 그루밍 · 엉덩이 씰룩씰룩 · 하트 · 부비부비',
+        phrases: ['냥?', '쓰다듬어도 돼', '간식 시간 아니야?', '집사, 일 열심히 해', '흥, 별로 안 반가워'] },
+      { id: 'dog', name: '푸들', acts: '점프 · 꼬리 흔들기 · 고개 갸웃 · 발라당',
+        phrases: ['산책 가자!', '헥헥 신난다!', '놀아줘 놀아줘!', '오늘 최고야!', '꼬리가 멈추질 않아'] },
+      { id: 'rabbit', name: '토끼', acts: '점프 · 볼 감싸기 · 하트 · 당근 뇸뇸 · 세수',
+        phrases: ['당근 있어?', '깡총!', '오늘도 힘내!', '귀 쫑긋', '세수 다 했어'] },
+      { id: 'quokka', name: '쿼카', acts: '점프 · 고개 갸웃 · 볼 감싸기 · 하트 · 나뭇잎 오물오물',
+        phrases: ['오늘도 웃자!', '나뭇잎 맛있다', '행복은 가까이에 있어', '헤헤', '같이 사진 찍을래?'] },
+      { id: 'bird', name: '오목눈이', acts: '날갯짓 · 날개 펴고 점프 · 하트 · 고개 갸웃',
+        phrases: ['짹짹!', '날씨 좋다!', '조금만 쉬어가', '포르르', '오늘 하늘 봤어?'] },
+    ];
+
+    const grid = document.getElementById('petGrid');
+    PETS.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'pet';
+      card.tabIndex = 0;
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', p.name + ' 반응 보기');
+      card.innerHTML = `
+        <div class="stage">
+          <span class="bubble"></span>
+          <img src="img/${p.id}/idle.png" alt="${p.name}" width="128" height="128">
+        </div>
+        <h3>${p.name}</h3>
+        <p class="acts">${p.acts}</p>`;
+      const img = card.querySelector('img');
+      const bubble = card.querySelector('.bubble');
+      let timer, last = -1;
+
+      // 클릭 동작 이미지를 미리 받아 두기 (처음 클릭할 때 깜빡임 방지)
+      new Image().src = `img/${p.id}/click_1.png`;
+
+      const react = () => {
+        clearTimeout(timer);
+        // APNG를 처음부터 다시 재생하려고 쿼리를 붙여 새로 불러옴
+        img.src = `img/${p.id}/click_1.png?t=${Date.now()}`;
+        let i;
+        do { i = Math.floor(Math.random() * p.phrases.length); } while (i === last && p.phrases.length > 1);
+        last = i;
+        bubble.textContent = p.phrases[i];
+        bubble.classList.add('show');
+        timer = setTimeout(() => {
+          img.src = `img/${p.id}/idle.png`;
+          bubble.classList.remove('show');
+        }, 2600);
+      };
+      card.addEventListener('click', react);
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); react(); }
+      });
+      grid.appendChild(card);
+    });
+
+    // 1. 최신 버전 정보 (실패해도 다운로드 버튼은 고정 주소로 동작)
+    (async () => {
+      const meta = document.getElementById('meta');
+      try {
+        const res = await fetch('https://api.github.com/repos/m3rri/jjorr-desktop/releases/latest');
+        if (!res.ok) return;
+        const r = await res.json();
+        const asset = (r.assets || []).find(a => a.name === 'JjorrDesktop-Setup.exe');
+        const date = new Date(r.published_at).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
+        const size = asset ? ` · ${(asset.size / 1024 / 1024).toFixed(0)}MB` : '';
+        meta.innerHTML = `${r.tag_name} · ${date}${size} · Windows 10 / 11 · <a href="${r.html_url}">변경 내역</a>`;
+      } catch (_) { /* 기본 문구 유지 */ }
+    })();
+  </script>
+</body>
+</html>
