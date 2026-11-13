@@ -82,14 +82,6 @@ function getMenuList() {
             url: "/blog",
             children: blogChildren,
         },
-        {
-            name: "Portfolio",
-            url: "/portfolio",
-        },
-        {
-            name: "About",
-            url: "/about",
-        },
     ];
 
     return `export const allMenu = ${JSON.stringify(menu)};`;

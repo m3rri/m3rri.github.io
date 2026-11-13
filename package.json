@@ -15,8 +15,6 @@
         "@emotion/babel-preset-css-prop": "^11.10.0",
         "@emotion/react": "^11.10.5",
         "@emotion/styled": "^11.10.5",
-        "@nivo/core": "^0.79.0",
-        "@nivo/line": "^0.79.1",
         "github-markdown-css": "5.2.0",
         "gray-matter": "^4.0.3",
         "next": "12.1.0",
